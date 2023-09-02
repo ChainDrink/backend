@@ -6,6 +6,7 @@ const { Web3 } = require('web3');
 
 const CONTRACT_ADDRESS = "5GDu9hdL8UyCELNa3vKSZSyFyS5cjUNkvK8Zy9wRRZUJEbHR";
 const CONTRACT_ADDRESS_EVM = "0x9417b2a92979C2aD4d5Ee074bd1217f6b6D6E330";
+const COMMAND = "python drink.py"
 
 async function main() {
   const api = await ApiPromise.create({ provider: new WsProvider("wss://ws.test.azero.dev") });
@@ -25,7 +26,7 @@ async function main() {
           const decodedEvent = abiInk.decodeEvent(data)
           console.log(decodedEvent.args[0].toString())
           console.log(decodedEvent.args[1].toString())
-          execSync("ls", {stdio: 'inherit'})
+          execSync(COMMAND, {stdio: 'inherit'})
         }
       }
       let currentCheck = await web3.eth.getBlockNumber()
@@ -37,7 +38,7 @@ async function main() {
             console.log("Mantle")
             console.log(web3.utils.fromWei(event.returnValues.value, "ether"))
             console.log(event.returnValues.value)
-            execSync("ls", {stdio: 'inherit'})
+            execSync(COMMAND, {stdio: 'inherit'})
             latestHash = event.transactionHash
           }
         })
